@@ -17,7 +17,7 @@
 
 
 <body>
-	<livewire:counter>
+	<livewire:state-and-directives>
 </body>
 
 </html>
