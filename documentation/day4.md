@@ -121,3 +121,88 @@
   - wire:submit.prevent to handle form properly
   - update() method to validate and save changes
   - Better to use <form> in real-world apps
+ 
+---
+_____________________________________________________________________________________________________________
+---
+
+## CODE SAMPLE
+
+    ```php
+    <div>
+	<input type="text" wire:model="name">
+	<p>{{ $name }}</p>
+	<button wire:click="save">Create</button>
+
+	@if ($message)
+		<div class="alert alert-success">
+			{{ $message }}
+		</div>
+	@endif
+
+	{{-- @if (session('message'))
+        <div class="alert alert-success">
+            {{ session('message') }}
+        </div>
+    @endif --}}
+	<hr />
+	<div>
+		<h2>Users</h2>
+		<ul>
+
+			{{-- @if (count($users))
+                @foreach ($users as $user)
+                    <li>{{ $user->name }}</li>
+                @endforeach
+            @else
+                <li>No users found.</li>
+            @endif --}}
+
+
+
+			@forelse ($users as $user)
+				<li>{{ $user->name }}</li>
+			@empty
+				<li>No users found.</li>
+			@endforelse
+
+		</ul>
+	</div>
+</div>
+
+    ```
+---
+    ```php
+    class Create extends Component
+{
+
+    public $name = '';
+    public $message = '';
+
+    public function mount()
+    {
+        // $this->users = User::all();
+    }
+
+    public function save()
+    {
+        $this->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        User::create([
+            'name' => $this->name,
+        ]);
+
+        $this->message = 'User created successfully.';
+        // session()->flash('message', 'User created successfully.');
+    }
+
+    public function render()
+    {
+        return view('livewire.users.create', [
+            'users' => User::all()
+        ]);
+    }
+}
+    ```
