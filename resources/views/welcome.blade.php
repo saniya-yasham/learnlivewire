@@ -17,7 +17,7 @@
 
 
 <body>
-	<livewire:state-and-directives>
+	<livewire:users.create>
 </body>
 
 </html>

@@ -7,18 +7,20 @@ use Livewire\Component;
 
 class Register extends Component
 {
+
     public $takenUsernames = [];
 
     public function mount()
     {
-        // Populate usernames at component mount
-        $this->takenUsernames = User::pluck('username')->toArray();
+        // mount function only runs once when the component renders
+        // it runs after everything has been bootstrapped completely
+
+        $this->takenUsernames = User::pluck('username')->toArray()
+        ;
     }
 
     public function render()
     {
-        return view('livewire.register', [
-            'takenUsernames' => $this->takenUsernames
-        ]);
+        return view('livewire.register');
     }
 }
