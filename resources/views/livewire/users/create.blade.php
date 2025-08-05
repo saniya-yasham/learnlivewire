@@ -7,8 +7,8 @@
 	@endif
 
 	<input name="username" type="text" wire:model="username" autocomplete="off">
-	<button wire:click="save">Save</button>
-
+	<button class="btn btn-primary" wire:click="save">Save</button>
+	<p>{{ $message }}</p>
 	<ul>
 		{{-- @if ($takenUsernames)
 			@foreach ($takenUsernames as $takenUsername)

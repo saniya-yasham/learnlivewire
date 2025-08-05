@@ -9,6 +9,14 @@ class Create extends Component
 {
 
     public $username = '';
+    public $message;
+
+    public function updatedUsername($value)
+    {
+        $this->message = "this is updated";
+        $this->username = $value . 100;
+    }
+
     // public $takenUsernames = [];
 
     // public function mount(){
@@ -30,9 +38,11 @@ class Create extends Component
 
     public function render()
     {
-        return view('livewire.users.create',
-        [
-            'takenUsernames' => User::pluck('username')->toArray()
-        ]);
+        return view(
+            'livewire.users.create',
+            [
+                'takenUsernames' => User::pluck('username')->toArray()
+            ]
+        );
     }
 }
